@@ -1,4 +1,5 @@
-import { Link } from 'react-router-dom';
+﻿import { Link } from 'react-router-dom';
+import { Eye } from 'lucide-react';
 import { Heart, Clock, Users, Star, ChefHat } from 'lucide-react';
 import { useState } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
@@ -158,6 +159,13 @@ export default function RecipeCard({ recipe, onLikeToggle }) {
             </div>
           </div>
 
+          {/* View Recipe Button */}
+          <div style={{ marginTop: '8px' }}>
+            <span className='btn btn-primary btn-sm' style={{ width: '100%', justifyContent: 'center', display: 'flex', gap: '6px', fontSize: '0.8rem' }}>
+              <Eye size={14} /> View Recipe
+            </span>
+          </div>
+
           {/* Difficulty */}
           <div style={{ marginTop: '4px' }}>
             <span className={`badge ${DIFF_COLORS[recipe.difficulty] || 'badge-green'}`} style={{ fontSize: '0.7rem' }}>
@@ -169,3 +177,4 @@ export default function RecipeCard({ recipe, onLikeToggle }) {
     </Link>
   );
 }
+

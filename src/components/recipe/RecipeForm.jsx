@@ -11,6 +11,7 @@ export default function RecipeForm({ initialData, onSubmit, loading }) {
     ingredients: [{ name: '', amount: '' }],
     steps: [{ stepNumber: 1, instruction: '' }],
     tags: '',
+    nutrition: { calories: '', protein: '', carbohydrates: '', fat: '', fiber: '' },
     ...initialData,
   });
   const [imageFile, setImageFile] = useState(null);
@@ -76,6 +77,7 @@ export default function RecipeForm({ initialData, onSubmit, loading }) {
     const data = new FormData();
     Object.entries(form).forEach(([k, v]) => {
       if (k === 'ingredients' || k === 'steps') data.append(k, JSON.stringify(v));
+      else if (k === 'nutrition') data.append(k, JSON.stringify(v));
       else if (k === 'tags') data.append(k, JSON.stringify(v.split(',').map(t => t.trim()).filter(Boolean)));
       else data.append(k, v);
     });
@@ -187,7 +189,7 @@ export default function RecipeForm({ initialData, onSubmit, loading }) {
             <div key={i} style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
               <input className="input" placeholder="Ingredient name" value={ing.name}
                 onChange={e => updateIngredient(i, 'name', e.target.value)} style={{ flex: 2 }} />
-              <input className="input" placeholder="Amount (e.g. 2 cups)" value={ing.amount}
+              <input className="input" placeholder="Qty (e.g. 3, 2 cups, 1 tsp)" value={ing.amount}
                 onChange={e => updateIngredient(i, 'amount', e.target.value)} style={{ flex: 1 }} />
               <button type="button" onClick={() => removeIngredient(i)}
                 className="btn btn-icon btn-ghost" disabled={form.ingredients.length === 1}
@@ -232,6 +234,28 @@ export default function RecipeForm({ initialData, onSubmit, loading }) {
         </div>
       </section>
 
+      {/* Nutrition Information */}
+      <section className="card" style={{ padding: '24px' }}>
+        <h2 style={{ margin: '0 0 8px', fontSize: '1.1rem', fontWeight: 700 }}>Nutritional Information <span style={{ fontSize: '0.8rem', color: '#64748B', fontWeight: 400 }}>(per serving, optional)</span></h2>
+        <p style={{ color: '#64748B', fontSize: '0.8rem', margin: '0 0 16px' }}>Enter approximate values per serving</p>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '16px' }}>
+          {[
+            { label: 'Calories (kcal)', field: 'calories', placeholder: '250' },
+            { label: 'Protein (g)', field: 'protein', placeholder: '12' },
+            { label: 'Carbohydrates (g)', field: 'carbohydrates', placeholder: '30' },
+            { label: 'Fat (g)', field: 'fat', placeholder: '8' },
+            { label: 'Fiber (g)', field: 'fiber', placeholder: '4' },
+          ].map(({ label, field, placeholder }) => (
+            <div key={field}>
+              <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.875rem', fontWeight: 500 }}>{label}</label>
+              <input className="input" type="number" min="0" placeholder={placeholder}
+                value={form.nutrition?.[field] || ''}
+                onChange={e => set('nutrition', { ...form.nutrition, [field]: e.target.value })} />
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* Submit */}
       <button type="submit" className="btn btn-primary btn-lg" disabled={loading} style={{ alignSelf: 'flex-end' }}>
         {loading ? (
@@ -241,3 +265,4 @@ export default function RecipeForm({ initialData, onSubmit, loading }) {
     </form>
   );
 }
+

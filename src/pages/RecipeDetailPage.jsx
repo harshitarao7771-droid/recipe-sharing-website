@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+﻿import { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import {
   Clock, Users, ChefHat, Heart, Bookmark, Share2,
@@ -74,7 +74,7 @@ export default function RecipeDetailPage() {
       const res = await rateRecipe(id, score);
       setUserRating(score);
       setRecipe(p => ({ ...p, averageRating: res.data.averageRating, ratings: [...(p.ratings || []).filter(r => r.user !== user._id), { user: user._id, score }] }));
-      addToast(`Rated ${score} star${score > 1 ? 's' : ''}! ⭐`, 'success');
+      addToast(`Rated ${score} star${score > 1 ? 's' : ''}! â­`, 'success');
     } catch { addToast('Failed to rate', 'error'); }
     finally { setRatingLoading(false); }
   };
@@ -84,7 +84,7 @@ export default function RecipeDetailPage() {
     try {
       await toggleFavorite(id);
       setIsFav(p => !p);
-      addToast(isFav ? 'Removed from favorites' : 'Saved to favorites! ❤️', isFav ? 'info' : 'success');
+      addToast(isFav ? 'Removed from favorites' : 'Saved to favorites! â¤ï¸', isFav ? 'info' : 'success');
     } catch { addToast('Failed', 'error'); }
   };
 
@@ -182,7 +182,7 @@ export default function RecipeDetailPage() {
                 <span style={{ fontSize: '0.875rem', fontWeight: 500 }}>{recipe.author.name}</span>
               </Link>
             )}
-            <span style={{ color: '#94A3B8', fontSize: '0.8rem' }}>·</span>
+            <span style={{ color: '#94A3B8', fontSize: '0.8rem' }}>Â·</span>
             <span style={{ color: '#94A3B8', fontSize: '0.8rem' }}>{new Date(recipe.createdAt).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</span>
           </div>
         </div>
@@ -269,7 +269,7 @@ export default function RecipeDetailPage() {
                       background: checkedIngredients.includes(i) ? '#10B981' : 'transparent',
                       transition: 'all 0.2s', display: 'flex', alignItems: 'center', justifyContent: 'center'
                     }}>
-                      {checkedIngredients.includes(i) && <span style={{ color: '#fff', fontSize: '0.7rem', fontWeight: 700 }}>✓</span>}
+                      {checkedIngredients.includes(i) && <span style={{ color: '#fff', fontSize: '0.7rem', fontWeight: 700 }}>âœ“</span>}
                     </div>
                     <span style={{ flex: 1, fontSize: '0.95rem' }}>{ing.name}</span>
                     <span style={{ color: '#F97316', fontWeight: 600, fontSize: '0.875rem' }}>{ing.amount}</span>
@@ -316,7 +316,7 @@ export default function RecipeDetailPage() {
                     {user.avatar ? <img src={user.avatar} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} /> : user.name?.[0]?.toUpperCase()}
                   </div>
                   <div style={{ flex: 1, display: 'flex', gap: '8px' }}>
-                    <input className="input" placeholder="Add a comment…" value={commentText}
+                    <input className="input" placeholder="Add a commentâ€¦" value={commentText}
                       onChange={e => setCommentText(e.target.value)} style={{ flex: 1 }} />
                     <button type="submit" className="btn btn-primary btn-icon" disabled={commentLoading || !commentText.trim()}>
                       <Send size={16} />
@@ -378,3 +378,5 @@ export default function RecipeDetailPage() {
     </div>
   );
 }
+
+
