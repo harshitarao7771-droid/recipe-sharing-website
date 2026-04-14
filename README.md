@@ -2,7 +2,7 @@
 <img width="1900" height="891" alt="Screenshot 2026-04-14 110842" src="https://github.com/user-attachments/assets/dd14554e-ab75-4920-87f2-0a96637b6ee3" />
 <img width="1569" height="763" alt="Screenshot 2026-04-14 110644" src="https://github.com/user-attachments/assets/2593dbc2-40ca-4661-a8e8-86d2fe2ab190" />
 <img width="1901" height="740" alt="Screenshot 2026-04-14 110600" src="https://github.com/user-attachments/assets/95a2f2dc-7d27-47ea-8509-c3b9a8169a0a" />
-﻿# 🍽️ FlavorVerse — Recipe Sharing Website
+﻿# 🍽️ Receipe App — Recipe Sharing Website
 
 A full-stack recipe sharing platform where users can discover, create, and manage recipes with meal planning and shopping list features.
 
